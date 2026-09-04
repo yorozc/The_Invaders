@@ -28,7 +28,6 @@ MAX_HEIGHT = WINDOW_HEIGHT - SIZE
 x = WINDOW_WIDTH / 2
 y = WINDOW_HEIGHT / 2 
 p1 = Player(x, y, SIZE, SIZE, (255,255,255), 100, 5)
-player_rect = p1.build_rect()
 
 # main game loop
 while True:
@@ -41,10 +40,13 @@ while True:
     
     # do any "per frame" actions
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] or keys[pygame.K_a]: player_rect.x -= SPEED
-    if keys[pygame.K_RIGHT] or keys[pygame.K_d]: player_rect.x += SPEED
-    if keys[pygame.K_UP] or keys[pygame.K_w]: player_rect.y -= SPEED
-    if keys[pygame.K_DOWN] or keys[pygame.K_s]: player_rect.y += SPEED 
+    dx, dy= 0,0
+    if keys[pygame.K_LEFT] or keys[pygame.K_a]: dx += -1
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d]: dx += 1
+    if keys[pygame.K_UP] or keys[pygame.K_w]: dy += -1
+    if keys[pygame.K_DOWN] or keys[pygame.K_s]: dy += 1
+
+    p1.move(dx, dy)
 
     #clear window every tick
     window.fill(BLACK)
@@ -53,7 +55,7 @@ while True:
     p1.draw(window)
 
     # keep rect in bounds
-    player_rect.clamp_ip(surf_window)
+    p1.rect.clamp_ip(surf_window)
 
     # update window
     pygame.display.update()

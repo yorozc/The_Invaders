@@ -19,3 +19,9 @@ class Entity:
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
+
+    def take_damage(self, amount):
+        self.health = max(0, self.health - amount)
+
+    def is_alive(self):
+        return self.health > 0
