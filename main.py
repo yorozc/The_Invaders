@@ -2,10 +2,8 @@ import pygame
 import os
 import random
 import time
-
-import pygame
-from pygame import Rect
 import sys
+from entities.player import Player
 
 # define constants
 BLACK = (0,0,0)
@@ -29,7 +27,8 @@ MAX_WIDTH = WINDOW_WIDTH - SIZE
 MAX_HEIGHT = WINDOW_HEIGHT - SIZE
 x = WINDOW_WIDTH / 2
 y = WINDOW_HEIGHT / 2 
-player_rect = pygame.Rect(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, SIZE, SIZE)
+p1 = Player(x, y, SIZE, SIZE, (255,255,255), 100, 5)
+player_rect = p1.build_rect()
 
 # main game loop
 while True:
@@ -51,7 +50,7 @@ while True:
     window.fill(BLACK)
 
     # draw all window elements
-    pygame.draw.rect(window, (255,255,255), player_rect)
+    p1.draw(window)
 
     # keep rect in bounds
     player_rect.clamp_ip(surf_window)
