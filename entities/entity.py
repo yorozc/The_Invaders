@@ -15,8 +15,6 @@ class Entity:
     def build_rect(self) -> Rect:
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
-        return self.rect
-
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
 
