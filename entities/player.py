@@ -9,6 +9,12 @@ class Player(Entity):
         self.bullets = []
         self.build_rect()
 
+
+    def check_bounds(self):
+        max_player_height = 400
+        if self.rect.y >= max_player_height:
+            self.rect.y = max_player_height 
+
     def move(self, dx, dy):
         self.rect.x += dx * self.move_speed
         self.rect.y += dy * self.move_speed
