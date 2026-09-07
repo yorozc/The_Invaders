@@ -19,8 +19,5 @@ class Enemy(Entity):
 
         self.attack()
 
-        if self.rect.y > window_height:
-            pass
-
     def attack(self):
         print('Enemy shoot')
