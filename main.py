@@ -33,7 +33,8 @@ y = WINDOW_HEIGHT * 0.75
 p1 = Player(x, 400, SIZE, SIZE, (255,255,255), 100, 5)
 
 # =====Enemy inits=====
-e_basic = Enemy(100, 100, SIZE, SIZE, (0, 255, 0), 100, 3)
+enemies_basic = [Enemy(x, 60, SIZE, SIZE, (0, 255, 0), 100, 1), Enemy(x - 60, 80, SIZE, SIZE, (0, 255, 0), 100, 1), Enemy(x + 60 , 80, SIZE, SIZE, (0, 255, 0), 100, 1)]
+
 
 # main game loop
 while True:
@@ -55,7 +56,14 @@ while True:
     if keys[pygame.K_UP] or keys[pygame.K_w]: dy += -1
     if keys[pygame.K_DOWN] or keys[pygame.K_s]: dy += 1
 
+    # ===movement===
+    for enemy in enemies_basic:
+        enemy.move(WINDOW_HEIGHT)
+
     p1.move(dx, dy) # updates player movement
+
+    # gets rid of enemy if they go past the screen
+    enemies_basic = [enemy for enemy in enemies_basic if enemy.rect.top < WINDOW_HEIGHT]    
 
     #clear window every tick
     window.fill(BLACK)
@@ -64,14 +72,14 @@ while True:
     p1.shoot(window)
 
     # draw all window elements
-    e_basic.draw(window)
+    for enemy in enemies_basic:
+        enemy.draw(window)
     p1.draw(window)
     
-
     # keep player in bounds
     p1.rect.clamp_ip(surf_window)
     p1.check_bounds()
-    print(p1.rect.y)
+
     # update window
     pygame.display.update()
 

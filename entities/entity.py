@@ -19,6 +19,9 @@ class Entity:
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
 
+    def collision_check(self, rect):
+        pass
+
     def take_damage(self, amount):
         self.health = max(0, self.health - amount)
 
