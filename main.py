@@ -4,6 +4,7 @@ import random
 import time
 import sys
 from entities.player import Player
+from entities.enemy import Enemy
 
 # define constants
 BLACK = (0,0,0)
@@ -27,7 +28,12 @@ MAX_WIDTH = WINDOW_WIDTH - SIZE
 MAX_HEIGHT = WINDOW_HEIGHT - SIZE
 x = WINDOW_WIDTH / 2 - SIZE
 y = WINDOW_HEIGHT * 0.75
+
+# =====Player init=====
 p1 = Player(x, 400, SIZE, SIZE, (255,255,255), 100, 5)
+
+# =====Enemy inits=====
+e_basic = Enemy(100, 100, SIZE, SIZE, (0, 255, 0), 100, 3)
 
 # main game loop
 while True:
@@ -58,7 +64,9 @@ while True:
     p1.shoot(window)
 
     # draw all window elements
+    e_basic.draw(window)
     p1.draw(window)
+    
 
     # keep player in bounds
     p1.rect.clamp_ip(surf_window)

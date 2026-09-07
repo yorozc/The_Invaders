@@ -11,6 +11,7 @@ class Entity:
         self.color = color
         self.health = health
         self.move_speed = move_speed
+        self.build_rect()
 
     def build_rect(self) -> Rect:
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)

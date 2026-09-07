@@ -6,11 +6,9 @@ class Player(Entity):
         super().__init__(x, y, width, height, color, health, move_speed)
         self.projectile_speed = 5
         self.inventory = {}
-        self.bullets = []
-        self.build_rect()
+        self.bullets = [] 
 
-
-    def check_bounds(self):
+    def check_bounds(self): 
         max_player_height = 400
         if self.rect.y >= max_player_height:
             self.rect.y = max_player_height 
