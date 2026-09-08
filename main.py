@@ -33,7 +33,8 @@ y = WINDOW_HEIGHT * 0.75
 p1 = Player(x, 400, SIZE, SIZE, (255,255,255), 100, 5)
 
 # =====Enemy inits=====
-enemies_basic = [Enemy(x, 60, SIZE, SIZE, (0, 255, 0), 100, 1), Enemy(x - 60, 80, SIZE, SIZE, (0, 255, 0), 100, 1), Enemy(x + 60 , 80, SIZE, SIZE, (0, 255, 0), 100, 1)]
+bullets = []
+enemies_basic = [Enemy(x, 60, SIZE, SIZE, (0, 255, 0), 100, 1, bullets), Enemy(x - 60, 80, SIZE, SIZE, (0, 255, 0), 100, 1, bullets), Enemy(x + 60 , 80, SIZE, SIZE, (0, 255, 0), 100, 1, bullets)]
 
 
 # main game loop
@@ -58,7 +59,7 @@ while True:
 
     # ===movement===
     for enemy in enemies_basic:
-        enemy.move(WINDOW_HEIGHT)
+        enemy.move()
 
     p1.move(dx, dy) # updates player movement
 
@@ -71,9 +72,12 @@ while True:
     # player bullet
     p1.shoot(window)
 
-    # draw all window elements
+    # ===enemy functions===
     for enemy in enemies_basic:
         enemy.draw(window)
+        enemy.shoot(window)
+
+    # draw all window elements
     p1.draw(window)
     
     # keep player in bounds
