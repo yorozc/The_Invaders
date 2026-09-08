@@ -72,7 +72,7 @@ while True:
     # ===enemy functions===
     for enemy in enemies_basic:
         enemy.draw(window)
-        enemy.shoot(window, WINDOW_HEIGHT)
+        enemy.update_bullet(window, WINDOW_HEIGHT) # temp
 
     # draw all window elements
     p1.draw(window)

@@ -40,7 +40,7 @@ class Player(Entity):
 
     def enemy_bullet_collision(self, bullet_list):
         if self.rect.collidelistall(bullet_list):
-            self.health -= 5
+            self.take_damage(5)
 
     def add_to_inv(self):
         pass

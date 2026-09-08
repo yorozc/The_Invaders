@@ -33,7 +33,7 @@ class Enemy(Entity):
         if pygame.time.get_ticks() - self.last_shot_time >= self.shoot_cooldown:
             self.add_bullet()
 
-        for bullet in self.bullets:
+        for bullet in self.bullets[:]:
             bullet.y += self.projectile_speed
             pygame.draw.ellipse(surface, (0, 0, 255), bullet)
             if bullet.y > window_height:
