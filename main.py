@@ -75,7 +75,7 @@ while True:
     # ===enemy functions===
     for enemy in enemies_basic:
         enemy.draw(window)
-        enemy.shoot(window)
+        enemy.shoot(window, WINDOW_HEIGHT)
 
     # draw all window elements
     p1.draw(window)
