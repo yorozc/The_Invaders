@@ -10,6 +10,9 @@ class Enemy(Entity):
         self.last_shot_time = 0
         self.start_time_move = 0
         self.bullets = bullets
+
+    def update(self):
+        pass
         
     def move(self):
         duration = 5
@@ -26,7 +29,7 @@ class Enemy(Entity):
         bullet = pygame.Rect(self.rect.centerx, self.rect.centery, 10, 10)
         self.bullets.append(bullet)
 
-    def shoot(self, surface, window_height):
+    def update_bullet(self, surface, window_height):
         if pygame.time.get_ticks() - self.last_shot_time >= self.shoot_cooldown:
             self.add_bullet()
 
@@ -37,8 +40,5 @@ class Enemy(Entity):
                 self.bullets.remove(bullet)
 
         print(self.bullets)
-
-    def update(self):
-        pass
 
         

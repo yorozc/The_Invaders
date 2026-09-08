@@ -8,6 +8,17 @@ class Player(Entity):
         self.inventory = {}
         self.bullets = [] 
 
+    def update(self, dx, dy, surface, bullet_list):
+        self.move(dx, dy)
+        self.update_bullet()
+        self.enemy_bullet_collision(bullet_list)
+        print(self.health)
+
+    def draw(self, surface):
+        pygame.draw.rect(surface, self.color, self.rect)
+        for bullet in self.bullets:
+            pygame.draw.ellipse(surface, (255, 0, 0), bullet)
+
     def check_bounds(self): 
         max_player_height = 400
         if self.rect.y >= max_player_height:
@@ -21,12 +32,15 @@ class Player(Entity):
         bullet = pygame.Rect(self.rect.center[0], self.rect.center[1], 10, 10)
         self.bullets.append(bullet)
 
-    def shoot(self, surface):
-        for bullet in self.bullets:
+    def update_bullet(self):
+        for bullet in self.bullets[:]:
             bullet.y -= self.projectile_speed
-            pygame.draw.ellipse(surface, (255, 0, 0), bullet)
             if bullet.y < 0:
                 self.bullets.remove(bullet)
+
+    def enemy_bullet_collision(self, bullet_list):
+        if self.rect.collidelistall(bullet_list):
+            self.health -= 5
 
     def add_to_inv(self):
         pass

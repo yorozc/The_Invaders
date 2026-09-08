@@ -33,8 +33,8 @@ y = WINDOW_HEIGHT * 0.75
 p1 = Player(x, 400, SIZE, SIZE, (255,255,255), 100, 5)
 
 # =====Enemy inits=====
-bullets = []
-enemies_basic = [Enemy(x, 60, SIZE, SIZE, (0, 255, 0), 100, 1, bullets), Enemy(x - 60, 80, SIZE, SIZE, (0, 255, 0), 100, 1, bullets), Enemy(x + 60 , 80, SIZE, SIZE, (0, 255, 0), 100, 1, bullets)]
+enemy_bullets = []
+enemies_basic = [Enemy(x, 60, SIZE, SIZE, (0, 255, 0), 100, 1, enemy_bullets), Enemy(x - 60, 80, SIZE, SIZE, (0, 255, 0), 100, 1, enemy_bullets), Enemy(x + 60 , 80, SIZE, SIZE, (0, 255, 0), 100, 1, enemy_bullets)]
 
 
 # main game loop
@@ -61,16 +61,13 @@ while True:
     for enemy in enemies_basic:
         enemy.move()
 
-    p1.move(dx, dy) # updates player movement
+    p1.update(dx, dy, window, enemy_bullets) # updates player movement
 
     # gets rid of enemy if they go past the screen
     enemies_basic = [enemy for enemy in enemies_basic if enemy.rect.top < WINDOW_HEIGHT]    
 
     #clear window every tick
     window.fill(BLACK)
-
-    # player bullet
-    p1.shoot(window)
 
     # ===enemy functions===
     for enemy in enemies_basic:
