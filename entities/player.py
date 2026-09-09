@@ -29,7 +29,7 @@ class Player(Entity):
         self.rect.y += dy * self.move_speed
 
     def add_bullet(self):
-        bullet = pygame.Rect(self.rect.center[0], self.rect.center[1], 10, 10)
+        bullet = pygame.Rect(self.rect.x + self.width /2 , self.rect.y + self.height / 2, 10, 10)
         self.bullets.append(bullet)
 
     def update_bullet(self):
