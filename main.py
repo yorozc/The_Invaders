@@ -29,7 +29,9 @@ MAX_WIDTH = WINDOW_WIDTH - SIZE
 MAX_HEIGHT = WINDOW_HEIGHT - SIZE
 x = WINDOW_WIDTH / 2 - SIZE
 y = WINDOW_HEIGHT * 0.75
+FONT = pygame.font.SysFont("arialblack", 40)
 GAME_STATE = "start_menu"
+start_menu = Start_Menu()
 
 # =====Player init=====
 p1 = Player(x, 400, SIZE, SIZE, (255,255,255), 100, 5)
@@ -44,7 +46,7 @@ while True:
     # check for and handle events
     for event in pygame.event.get():
         # click close, quit pygame and program
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or GAME_STATE == "quit":
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYDOWN:
@@ -52,9 +54,10 @@ while True:
                 p1.add_bullet()
 
     if GAME_STATE == "start_menu":
-        Start_Menu.draw_menu()
+        start_menu.draw_text("The Invaders", FONT, (255, 255, 255), 160, WINDOW_HEIGHT/6, window)
+       
 
-    if GAME_STATE == "game":
+    elif GAME_STATE == "game":
     
         # do any "per frame" actions
         keys = pygame.key.get_pressed()
@@ -89,6 +92,6 @@ while True:
         p1.check_bounds()
 
         # update window
-        pygame.display.update()
+    pygame.display.update()
 
-        clock.tick(FPS)
+    clock.tick(FPS)
