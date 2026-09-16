@@ -5,6 +5,7 @@ import time
 import sys
 from entities.player import Player
 from entities.enemy import Enemy
+from menus.start_menu import Start_Menu
 
 # define constants
 BLACK = (0,0,0)
@@ -28,6 +29,7 @@ MAX_WIDTH = WINDOW_WIDTH - SIZE
 MAX_HEIGHT = WINDOW_HEIGHT - SIZE
 x = WINDOW_WIDTH / 2 - SIZE
 y = WINDOW_HEIGHT * 0.75
+GAME_STATE = "start_menu"
 
 # =====Player init=====
 p1 = Player(x, 400, SIZE, SIZE, (255,255,255), 100, 5)
@@ -48,40 +50,45 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 p1.add_bullet()
+
+    if GAME_STATE == "start_menu":
+        Start_Menu.draw_menu()
+
+    if GAME_STATE == "game":
     
-    # do any "per frame" actions
-    keys = pygame.key.get_pressed()
-    dx, dy= 0,0
-    if keys[pygame.K_LEFT] or keys[pygame.K_a]: dx += -1
-    if keys[pygame.K_RIGHT] or keys[pygame.K_d]: dx += 1
-    if keys[pygame.K_UP] or keys[pygame.K_w]: dy += -1
-    if keys[pygame.K_DOWN] or keys[pygame.K_s]: dy += 1
+        # do any "per frame" actions
+        keys = pygame.key.get_pressed()
+        dx, dy= 0,0
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]: dx += -1
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]: dx += 1
+        if keys[pygame.K_UP] or keys[pygame.K_w]: dy += -1
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]: dy += 1
 
-    # ===movement===
-    for enemy in enemies_basic:
-        enemy.move()
+        # ===movement===
+        for enemy in enemies_basic:
+            enemy.move()
 
-    p1.update(dx, dy, window, enemy_bullets) # updates player movement
+        p1.update(dx, dy, window, enemy_bullets) # updates player movement
 
-    # gets rid of enemy if they go past the screen
-    enemies_basic = [enemy for enemy in enemies_basic if enemy.rect.top < WINDOW_HEIGHT]    
+        # gets rid of enemy if they go past the screen
+        enemies_basic = [enemy for enemy in enemies_basic if enemy.rect.top < WINDOW_HEIGHT]    
 
-    #clear window every tick
-    window.fill(BLACK)
+        #clear window every tick
+        window.fill(BLACK)
 
-    # ===enemy functions===
-    for enemy in enemies_basic:
-        enemy.draw(window)
-        enemy.update_bullet(window, WINDOW_HEIGHT) # temp
+        # ===enemy functions===
+        for enemy in enemies_basic:
+            enemy.draw(window)
+            enemy.update_bullet(window, WINDOW_HEIGHT) # temp
 
-    # draw all window elements
-    p1.draw(window)
-    
-    # keep player in bounds
-    p1.rect.clamp_ip(surf_window)
-    p1.check_bounds()
+        # draw all window elements
+        p1.draw(window)
+        
+        # keep player in bounds
+        p1.rect.clamp_ip(surf_window)
+        p1.check_bounds()
 
-    # update window
-    pygame.display.update()
+        # update window
+        pygame.display.update()
 
-    clock.tick(FPS)
+        clock.tick(FPS)
