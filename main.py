@@ -6,6 +6,7 @@ import sys
 from entities.player import Player
 from entities.enemy import Enemy
 from menus.start_menu import Start_Menu
+from menus.button import Button
 
 # define constants
 BLACK = (0,0,0)
@@ -21,6 +22,10 @@ surf_window = window.get_rect()
 clock = pygame.time.Clock()
 
 # load assets
+# 279x126
+start_img = pygame.image.load('assets/start_btn.png').convert_alpha()
+# 240x126
+exit_img = pygame.image.load('assets/exit_btn.png').convert_alpha()
 
 # initialize variables 
 
@@ -32,6 +37,8 @@ y = WINDOW_HEIGHT * 0.75
 FONT = pygame.font.SysFont("arialblack", 40)
 GAME_STATE = "start_menu"
 start_menu = Start_Menu()
+start_button = Button((640-279) / 2, 100, start_img, 1)
+exit_btn = Button((640-240) / 2, 250, exit_img, 1)
 
 # =====Player init=====
 p1 = Player(x, 400, SIZE, SIZE, (255,255,255), 100, 5)
@@ -54,7 +61,9 @@ while True:
                 p1.add_bullet()
 
     if GAME_STATE == "start_menu":
-        start_menu.draw_text("The Invaders", FONT, (255, 255, 255), 160, WINDOW_HEIGHT/6, window)
+        start_menu.draw_text("The Invaders", FONT, (255, 255, 255), 160, 25, window)
+        start_button.draw(window)
+        exit_btn.draw(window)
        
 
     elif GAME_STATE == "game":
