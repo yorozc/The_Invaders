@@ -62,8 +62,12 @@ while True:
 
     if GAME_STATE == "start_menu":
         start_menu.draw_text("The Invaders", FONT, (255, 255, 255), 160, 25, window)
-        start_button.draw(window)
-        exit_btn.draw(window)
+        
+        if start_button.draw(window):
+            GAME_STATE = "game"
+
+        if exit_btn.draw(window):
+            GAME_STATE = "quit"
        
 
     elif GAME_STATE == "game":
