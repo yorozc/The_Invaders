@@ -101,6 +101,7 @@ while True:
         p1.check_bounds()
 
         # update window
+        
     pygame.display.update()
 
     clock.tick(FPS)
